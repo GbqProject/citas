@@ -92,10 +92,10 @@ Copy-Item .env.example .env
 .\scripts\preflight.ps1
 ```
 
-3. Levanta únicamente MySQL:
+3. Levanta MySQL, backend y frontend:
 
 ```powershell
-docker compose up -d mysql
+docker compose up -d
 ```
 
 4. Comprueba:
@@ -105,13 +105,12 @@ docker compose ps
 .\scripts\db-smoke-test.ps1
 ```
 
-5. Si quieres disponer también de toolchains Java/Node dentro de contenedores:
+5. Abre la aplicación:
 
-```powershell
-docker compose --profile dev up -d
-```
+- Frontend: `http://localhost:5173/`
+- API: `http://localhost:8080/`
 
-Estos contenedores **no contienen la aplicación**. Solo montan los repos vacíos y ofrecen Java/Maven y Node para que el estudiante inicialice sus proyectos.
+Los servicios de desarrollo ejecutan Spring Boot y Vite automáticamente al arrancar Compose. La primera ejecución puede tardar mientras Maven y npm descargan dependencias.
 
 ## Inicializar Git
 

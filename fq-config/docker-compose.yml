@@ -1,0 +1,29 @@
+services:
+  mysql:
+    container_name: fq-citas-mysql
+
+  citas-api-dev:
+    container_name: fq-citas-api-dev
+    environment:
+      FRONTEND_ORIGIN: http://localhost:5174
+      REFRESH_COOKIE_SECURE: "false"
+      REFRESH_COOKIE_SAME_SITE: Lax
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true
+    ports: !override
+      - "8081:8080"
+
+  citas-web-dev:
+    container_name: fq-citas-web-dev
+    environment:
+      VITE_API_URL: http://localhost:8081
+    ports: !override
+      - "5174:5173"
+      - "4201:4200"
+
+volumes:
+  mysql_data:
+    name: fq_mysql_data
+  maven_cache:
+    name: fq_maven_cache
+  node_cache:
+    name: fq_node_cache

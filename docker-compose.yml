@@ -61,7 +61,7 @@ services:
     command:
       - bash
       - -lc
-      - tail -f /dev/null
+      - mvn -q -DskipTests '-Dspring-boot.run.main-class=co.com.fcv.training.citas.CitasApplication' spring-boot:run
 
 
   citas-web-dev:
@@ -85,7 +85,7 @@ services:
     command:
       - sh
       - -lc
-      - tail -f /dev/null
+      - if [ ! -x node_modules/.bin/vite ]; then npm ci; fi; npm run dev -- --host 0.0.0.0
 
 
 volumes:
